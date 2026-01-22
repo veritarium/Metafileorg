@@ -18,7 +18,7 @@ A powerful, portable tool for creating **multiple virtual views** of your file c
 - **Dry-run preview** - Full HTML report before any changes
 - **Transaction-safe** - Undo/rollback capability for all operations
 - **Web-based search interface** - Flask UI with faceted filtering
-- **Portable executable** - No installation required; runs from USB stick
+- **Cross-platform** - Works on Windows, Linux, and macOS
 
 ## 🚀 Quick Start
 
