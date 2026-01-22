@@ -10,7 +10,7 @@ Pillow>=10.0               # image EXIF
 python-docx>=0.8.11        # DOCX text
 PyPDF2>=3.0                # PDF text
 exifread>=3.0              # EXIF
-textract>=1.6              # various document formats (optional)
+# textract>=1.6 removed due to broken metadata (incompatible with pip>=24.1)
 pefile>=2023.2             # PE file version info
 
 # Web UI (optional)
@@ -22,6 +22,8 @@ pytest>=7.4                # testing framework (required for tests mentioned in 
 pyinstaller>=5.13          # create standalone executable
 watchdog>=3.0              # real-time monitoring
 
-# Note: textract (line 12) is marked as optional in comments but will be installed by default.
-# To skip optional dependencies, install with: pip install --no-deps -r requirements.txt
-# then manually install only the packages you need.
+# Note: textract has been removed due to incompatibility with pip>=24.1 (broken metadata).
+# If you need advanced document text extraction, consider alternatives like:
+# - python-magic for file type detection
+# - pdfplumber for PDFs
+# - pytesseract for OCR
