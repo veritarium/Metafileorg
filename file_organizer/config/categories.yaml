@@ -1,0 +1,637 @@
+mapping:
+  3dm:
+    category: CAD
+    subcategory: Rhino
+  7z:
+    category: Archives
+    subcategory: 7Zip
+  acr:
+    category: CAD
+    subcategory: AutoCAD
+  adsk:
+    category: CAD
+    subcategory: Autodesk
+  adsklib:
+    category: CAD
+    subcategory: Autodesk Library
+  ai:
+    category: Images
+    subcategory: Vector
+  avi:
+    category: Media
+    subcategory: Video
+  bak:
+    category: Miscellaneous
+    subcategory: Backup
+  bat:
+    category: Code
+    subcategory: Script
+  blend:
+    category: CAD
+    subcategory: Blender
+  blend1:
+    category: CAD
+    subcategory: Blender Backup
+  bmp:
+    category: Images
+    subcategory: Bitmap
+  bpmn:
+    category: Documents
+    subcategory: Business Process
+  bup:
+    category: Miscellaneous
+    subcategory: Backup
+  bz2:
+    category: Archives
+    subcategory: BZip2
+  c:
+    category: Code
+    subcategory: C
+  cpp:
+    category: Code
+    subcategory: C++
+  cs:
+    category: Code
+    subcategory: C#
+  css:
+    category: Code
+    subcategory: Web
+  csv:
+    category: Documents
+    subcategory: Spreadsheet
+  ctb:
+    category: CAD
+    subcategory: AutoCAD Plot Style
+  cuix:
+    category: CAD
+    subcategory: AutoCAD UI
+  db:
+    category: Miscellaneous
+    subcategory: Database
+  dcl:
+    category: CAD
+    subcategory: AutoCAD Dialog
+  dgn:
+    category: CAD
+    subcategory: MicroStation
+  dll:
+    category: System
+    subcategory: Library
+  doc:
+    category: Documents
+    subcategory: Word
+  docx:
+    category: Documents
+    subcategory: Word
+  dvb:
+    category: CAD
+    subcategory: AutoCAD VBA
+  dwf:
+    category: CAD
+    subcategory: Design Web Format
+  dwg:
+    category: CAD
+    subcategory: AutoCAD
+  dwl:
+    category: CAD
+    subcategory: AutoCAD Lock
+  dwl2:
+    category: CAD
+    subcategory: AutoCAD Lock
+  dwt:
+    category: CAD
+    subcategory: AutoCAD Template
+  dwt-alt:
+    category: CAD
+    subcategory: AutoCAD Template
+  dxf:
+    category: CAD
+    subcategory: AutoCAD
+  emz:
+    category: Images
+    subcategory: Compressed EMF
+  exe:
+    category: System
+    subcategory: Executable
+  exr:
+    category: Images
+    subcategory: OpenEXR
+  fbx:
+    category: CAD
+    subcategory: 3DModel
+  fdf:
+    category: Documents
+    subcategory: PDF Form
+  flac:
+    category: Media
+    subcategory: Audio
+  gif:
+    category: Images
+    subcategory: Graphic
+  glb:
+    category: CAD
+    subcategory: 3D Model
+  glsl:
+    category: Code
+    subcategory: Shader
+  glslfx:
+    category: Code
+    subcategory: Shader Effect
+  go:
+    category: Code
+    subcategory: Go
+  gz:
+    category: Archives
+    subcategory: GZip
+  h:
+    category: Code
+    subcategory: Header
+  hdr:
+    category: Images
+    subcategory: HDR
+  hipfb:
+    category: CAD
+    subcategory: Houdini
+  html:
+    category: Code
+    subcategory: Web
+  iam:
+    category: CAD
+    subcategory: Inventor Assembly
+  ico:
+    category: Images
+    subcategory: Icon
+  ics:
+    category: Documents
+    subcategory: Calendar
+  idw:
+    category: CAD
+    subcategory: Inventor Drawing
+  ifc:
+    category: CAD
+    subcategory: Industry Foundation Classes
+  ifo:
+    category: Media
+    subcategory: DVD Info
+  iges:
+    category: CAD
+    subcategory: 3DModel
+  igs:
+    category: CAD
+    subcategory: 3DModel
+  ini:
+    category: Code
+    subcategory: Config
+  ipj:
+    category: CAD
+    subcategory: Inventor Project
+  ipn:
+    category: CAD
+    subcategory: Inventor Presentation
+  ipt:
+    category: CAD
+    subcategory: Inventor Part
+  iqy:
+    category: Documents
+    subcategory: Excel Query
+  iso:
+    category: System
+    subcategory: DiskImage
+  java:
+    category: Code
+    subcategory: Java
+  jpeg:
+    category: Images
+    subcategory: Photo
+  jpg:
+    category: Images
+    subcategory: Photo
+  js:
+    category: Code
+    subcategory: JavaScript
+  json:
+    category: Code
+    subcategory: Data
+  jt:
+    category: CAD
+    subcategory: JT
+  key:
+    category: Documents
+    subcategory: Keynote
+  lin:
+    category: CAD
+    subcategory: AutoCAD Linetype
+  lng:
+    category: Config
+    subcategory: Language
+  lnk:
+    category: System
+    subcategory: Shortcut
+  log:
+    category: Miscellaneous
+    subcategory: Log
+  lsp:
+    category: Code
+    subcategory: Lisp
+  manifest:
+    category: System
+    subcategory: Manifest
+  mat:
+    category: Data
+    subcategory: MATLAB
+  max:
+    category: CAD
+    subcategory: 3ds Max
+  md:
+    category: Documents
+    subcategory: Markdown
+  mdl:
+    category: CAD
+    subcategory: Model
+  metal:
+    category: Code
+    subcategory: Metal Shader
+  mkv:
+    category: Media
+    subcategory: Video
+  mnl:
+    category: CAD
+    subcategory: AutoCAD Menu Lisp
+  mov:
+    category: Media
+    subcategory: Video
+  mp3:
+    category: Media
+    subcategory: Audio
+  mp4:
+    category: Media
+    subcategory: Video
+  mpp:
+    category: Documents
+    subcategory: Microsoft Project
+  msg:
+    category: Documents
+    subcategory: Outlook Message
+  msi:
+    category: System
+    subcategory: Installer
+  mtlx:
+    category: CAD
+    subcategory: MaterialX
+  mus:
+    category: Media
+    subcategory: Music
+  npy:
+    category: Data
+    subcategory: NumPy
+  npz:
+    category: Data
+    subcategory: NumPy
+  nwc:
+    category: CAD
+    subcategory: Navisworks
+  nwd:
+    category: CAD
+    subcategory: Navisworks
+  nwf:
+    category: CAD
+    subcategory: Navisworks
+  obj:
+    category: CAD
+    subcategory: 3DModel
+  ocio:
+    category: Config
+    subcategory: Color Management
+  odt:
+    category: Documents
+    subcategory: OpenDocument
+  old:
+    category: Miscellaneous
+    subcategory: Backup
+  osl:
+    category: Code
+    subcategory: Open Shading Language
+  oso:
+    category: Code
+    subcategory: OSL Compiled
+  p7s:
+    category: System
+    subcategory: Digital Signature
+  pak:
+    category: Archives
+    subcategory: Package
+  pc3:
+    category: CAD
+    subcategory: AutoCAD Plotter Config
+  pcp:
+    category: CAD
+    subcategory: AutoCAD Plotter Config
+  pdb:
+    category: Data
+    subcategory: Database
+  pdf:
+    category: Documents
+    subcategory: PDF
+  pem:
+    category: System
+    subcategory: Certificate
+  pep8:
+    category: Config
+    subcategory: Python Style
+  php:
+    category: Code
+    subcategory: PHP
+  pickle:
+    category: Data
+    subcategory: Python Pickle
+  pkl:
+    category: Data
+    subcategory: Python Pickle
+  pkpass:
+    category: Miscellaneous
+    subcategory: Apple Wallet
+  png:
+    category: Images
+    subcategory: Graphic
+  pot:
+    category: Documents
+    subcategory: PowerPoint Template
+  potx:
+    category: Documents
+    subcategory: PowerPoint Template
+  pov:
+    category: CAD
+    subcategory: POV-Ray
+  ppsx:
+    category: Documents
+    subcategory: PowerPoint Show
+  ppt:
+    category: Documents
+    subcategory: PowerPoint
+  pptx:
+    category: Documents
+    subcategory: PowerPoint
+  ps1:
+    category: Code
+    subcategory: PowerShell
+  pth:
+    category: Config
+    subcategory: Python Path
+  ptx:
+    category: Code
+    subcategory: CUDA PTX
+  pxd:
+    category: Code
+    subcategory: Cython
+  py:
+    category: Code
+    subcategory: Python
+  pyc:
+    category: Code
+    subcategory: Python Bytecode
+  pyd:
+    category: Code
+    subcategory: Python DLL
+  pyf:
+    category: Code
+    subcategory: Fortran Wrapper
+  pyi:
+    category: Code
+    subcategory: Python Stub
+  pyx:
+    category: Code
+    subcategory: Cython Source
+  qry:
+    category: Data
+    subcategory: Query
+  rar:
+    category: Archives
+    subcategory: RAR
+  rdf:
+    category: Data
+    subcategory: Resource Description
+  rev:
+    category: CAD
+    subcategory: Revit
+  rfa:
+    category: CAD
+    subcategory: Revit Family
+  rs:
+    category: Code
+    subcategory: Rust
+  rst:
+    category: Documents
+    subcategory: reStructuredText
+  rtf:
+    category: Documents
+    subcategory: RichText
+  rvt:
+    category: CAD
+    subcategory: Revit Project
+  sat:
+    category: CAD
+    subcategory: ACIS SAT
+  scdoc:
+    category: Documents
+    subcategory: Scientific Document
+  scr:
+    category: System
+    subcategory: Screen Saver
+  sh:
+    category: Code
+    subcategory: Script
+  sha256:
+    category: Miscellaneous
+    subcategory: Hash
+  shp:
+    category: Data
+    subcategory: Shapefile
+  shx:
+    category: Data
+    subcategory: Shapefile Index
+  skp:
+    category: CAD
+    subcategory: SketchUp
+  sl:
+    category: Code
+    subcategory: Scheme
+  slb:
+    category: CAD
+    subcategory: AutoCAD Slide Library
+  sld:
+    category: CAD
+    subcategory: SolidWorks Drawing
+  sldasm:
+    category: CAD
+    subcategory: SolidWorks Assembly
+  sldprt:
+    category: CAD
+    subcategory: SolidWorks Part
+  slnk:
+    category: System
+    subcategory: Shortcut
+  sph:
+    category: Miscellaneous
+    subcategory: Sphere
+  spi1d:
+    category: Images
+    subcategory: Lookup Table
+  spi3d:
+    category: Images
+    subcategory: Lookup Table
+  spimtx:
+    category: Images
+    subcategory: Lookup Table
+  sqlite:
+    category: Miscellaneous
+    subcategory: Database
+  step:
+    category: CAD
+    subcategory: 3DModel
+  stl:
+    category: CAD
+    subcategory: 3DPrint
+  stp:
+    category: CAD
+    subcategory: 3DModel
+  styxml:
+    category: Miscellaneous
+    subcategory: Style XML
+  svg:
+    category: Images
+    subcategory: Vector
+  sxk:
+    category: Miscellaneous
+    subcategory: Unknown
+  sys:
+    category: System
+    subcategory: Driver
+  tar:
+    category: Archives
+    subcategory: TAR
+  template:
+    category: Config
+    subcategory: Template
+  tex:
+    category: Documents
+    subcategory: LaTeX
+  thmx:
+    category: Documents
+    subcategory: Office Theme
+  tif:
+    category: Images
+    subcategory: Photo
+  tiff:
+    category: Images
+    subcategory: Photo
+  tmp:
+    category: Miscellaneous
+    subcategory: Temporary
+  tmpl:
+    category: Config
+    subcategory: Template
+  toml:
+    category: Code
+    subcategory: Config
+  tr:
+    category: Miscellaneous
+    subcategory: Trace
+  ts:
+    category: Code
+    subcategory: TypeScript
+  ttf:
+    category: System
+    subcategory: TrueType Font
+  tus:
+    category: Miscellaneous
+    subcategory: Unknown
+  txt:
+    category: Documents
+    subcategory: Text
+  typed:
+    category: Miscellaneous
+    subcategory: Typed
+  url:
+    category: System
+    subcategory: Internet Shortcut
+  usda:
+    category: CAD
+    subcategory: Universal Scene Description
+  v:
+    category: Code
+    subcategory: Verilog
+  vob:
+    category: Media
+    subcategory: DVD Video
+  vxp:
+    category: Miscellaneous
+    subcategory: Unknown
+  wav:
+    category: Media
+    subcategory: Audio
+  wbk:
+    category: Documents
+    subcategory: Word Backup
+  webp:
+    category: Images
+    subcategory: Graphic
+  whl:
+    category: Archives
+    subcategory: Python Wheel
+  wmf:
+    category: Images
+    subcategory: Windows Metafile
+  wmv:
+    category: Media
+    subcategory: Video
+  woff2:
+    category: System
+    subcategory: Web Font
+  x_t:
+    category: CAD
+    subcategory: Parasolid
+  xdb:
+    category: Data
+    subcategory: XML Database
+  xlf:
+    category: Documents
+    subcategory: Localization
+  xls:
+    category: Documents
+    subcategory: Excel
+  xlsx:
+    category: Documents
+    subcategory: Excel
+  xlt:
+    category: Documents
+    subcategory: Excel Template
+  xltx:
+    category: Documents
+    subcategory: Excel Template
+  xml:
+    category: Code
+    subcategory: Data
+  xsl:
+    category: Code
+    subcategory: XSL
+  xslt:
+    category: Code
+    subcategory: XSLT
+  xz:
+    category: Archives
+    subcategory: XZ
+  yaml:
+    category: Code
+    subcategory: Config
+  yml:
+    category: Code
+    subcategory: Config
+  zip:
+    category: Archives
+    subcategory: ZIP
+  zst:
+    category: Archives
+    subcategory: Zstandard
+default:
+  category: Miscellaneous
+  subcategory: Unknown

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Catalog Search</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <style>
+        body { padding: 20px; background-color: #f8f9fa; }
+        .card { margin-bottom: 20px; }
+        .table-hover tbody tr:hover { background-color: #f1f3f4; }
+        .path-cell { max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .size-cell { text-align: right; }
+        .category-badge { font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="mb-4">File Catalog Search</h1>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                Scan a Directory
+            </div>
+            <div class="card-body">
+                <p>Select a top‑level directory to scan. The files and folders contained within it will be indexed and appear in the catalog.</p>
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="scanRoot" placeholder="/path/to/directory">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary w-100" id="scanButton">Scan Now</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-secondary w-100" id="scanOptionsButton">Options</button>
+                    </div>
+                </div>
+                <div class="row mt-3" id="scanOptions" style="display:none;">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="computeHash">
+                            <label class="form-check-label" for="computeHash">Compute SHA‑256 hash</label>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="ignoreExtensions" class="form-label">Ignore extensions (space‑separated)</label>
+                        <input type="text" class="form-control" id="ignoreExtensions" placeholder="tmp log bak">
+                    </div>
+                </div>
+                <div class="mt-3" id="scanResult"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="searchInput" class="form-label">Search</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Filename or path">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="categorySelect" class="form-label">Category</label>
+                        <select class="form-select" id="categorySelect">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="extensionSelect" class="form-label">Extension</label>
+                        <select class="form-select" id="extensionSelect">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="sizeRange" class="form-label">Size (MB)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="sizeMin" placeholder="Min">
+                            <span class="input-group-text">-</span>
+                            <input type="number" class="form-control" id="sizeMax" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="searchButton">Search</button>
+                <button class="btn btn-outline-secondary" id="resetButton">Reset</button>
+                <span class="ms-3" id="resultCount"></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <table id="resultsTable" class="table table-striped table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Path</th>
+                            <th>Category</th>
+                            <th>Extension</th>
+                            <th>Size</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be filled by JavaScript -->
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Duplicate Files (Top 50)
+            </div>
+            <div class="card-body">
+                <div id="duplicatesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        let currentPage = 1;
+        const limit = 50;
+
+        // Load categories and extensions
+        $.get('/api/categories', function(data) {
+            data.forEach(cat => {
+                $('#categorySelect').append(`<option value="${cat}">${cat}</option>`);
+            });
+        });
+        $.get('/api/extensions', function(data) {
+            data.forEach(ext => {
+                $('#extensionSelect').append(`<option value="${ext}">${ext}</option>`);
+            });
+        });
+
+        // Load duplicates
+        $.get('/api/duplicates', function(data) {
+            let html = '';
+            data.forEach(group => {
+                html += `<div class="mb-2"><strong>${group.count} duplicates (hash: ${group.hash.slice(0,8)}…)</strong><br>`;
+                group.paths.forEach(p => html += `<small class="text-muted">${p}</small><br>`);
+                html += '</div>';
+            });
+            $('#duplicatesList').html(html || '<em>No duplicates found.</em>');
+        });
+
+        function performSearch(page = 1) {
+            const query = $('#searchInput').val();
+            const category = $('#categorySelect').val();
+            const extension = $('#extensionSelect').val();
+            const sizeMin = $('#sizeMin').val() ? $('#sizeMin').val() * 1024 * 1024 : '';
+            const sizeMax = $('#sizeMax').val() ? $('#sizeMax').val() * 1024 * 1024 : '';
+            const offset = (page - 1) * limit;
+
+            $.get('/api/search', {
+                q: query,
+                category: category,
+                extension: extension,
+                size_min: sizeMin,
+                size_max: sizeMax,
+                limit: limit,
+                offset: offset
+            }, function(response) {
+                $('#resultCount').html(`Total: ${response.total} files`);
+                renderTable(response.results);
+                renderPagination(response.total, page);
+            });
+        }
+
+        function renderTable(results) {
+            const tbody = $('#resultsTable tbody');
+            tbody.empty();
+            results.forEach(file => {
+                const created = new Date(file.created * 1000).toLocaleDateString();
+                const sizeMB = (file.size / (1024*1024)).toFixed(2);
+                const pathShort = file.path.length > 60 ? file.path.substring(0, 57) + '...' : file.path;
+                tbody.append(`
+                    <tr>
+                        <td><strong>${escapeHtml(file.name)}</strong></td>
+                        <td class="path-cell" title="${escapeHtml(file.path)}">${escapeHtml(pathShort)}</td>
+                        <td><span class="badge bg-secondary category-badge">${escapeHtml(file.category || '')}</span></td>
+                        <td><code>${escapeHtml(file.extension || '')}</code></td>
+                        <td class="size-cell">${sizeMB} MB</td>
+                        <td>${created}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="openFile(${file.id})">Open</button>
+                            <button class="btn btn-sm btn-outline-success" onclick="copyPath('${escapeJs(file.path)}')">Copy Path</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        function renderPagination(total, currentPage) {
+            const totalPages = Math.ceil(total / limit);
+            const pagination = $('#pagination');
+            pagination.empty();
+            if (totalPages <= 1) return;
+
+            for (let i = 1; i <= totalPages; i++) {
+                const active = i === currentPage ? 'active' : '';
+                pagination.append(`
+                    <li class="page-item ${active}">
+                        <a class="page-link" href="#" onclick="gotoPage(${i})">${i}</a>
+                    </li>
+                `);
+            }
+        }
+
+        function gotoPage(page) {
+            currentPage = page;
+            performSearch(page);
+        }
+
+        function openFile(fileId) {
+            $.get(`/api/open/${fileId}`, function(data) {
+                if (data.exists) {
+                    // On Windows, you could use a file:// URL or shell command
+                    alert(`File exists: ${data.path}`);
+                } else {
+                    alert(`File not found: ${data.path}`);
+                }
+            });
+        }
+
+        function copyPath(path) {
+            navigator.clipboard.writeText(path).then(() => {
+                alert('Path copied to clipboard');
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function escapeJs(text) {
+            return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // Event listeners
+        $('#searchButton').click(() => {
+            currentPage = 1;
+            performSearch(currentPage);
+        });
+        $('#resetButton').click(() => {
+            $('#searchInput').val('');
+            $('#categorySelect').val('');
+            $('#extensionSelect').val('');
+            $('#sizeMin').val('');
+            $('#sizeMax').val('');
+            currentPage = 1;
+            performSearch(currentPage);
+        });
+        $('#searchInput').keypress(e => {
+            if (e.key === 'Enter') $('#searchButton').click();
+        });
+
+        // Scan functionality
+        $('#scanOptionsButton').click(() => {
+            $('#scanOptions').toggle();
+        });
+        $('#scanButton').click(() => {
+            const root = $('#scanRoot').val().trim();
+            if (!root) {
+                alert('Please enter a directory path');
+                return;
+            }
+            const computeHash = $('#computeHash').prop('checked');
+            const ignoreExtensions = $('#ignoreExtensions').val().trim().split(/\s+/).filter(e => e);
+            $('#scanResult').html('<div class="alert alert-info">Scanning...</div>');
+            $.post('/api/scan', {
+                root: root,
+                compute_hash: computeHash,
+                ignore_extensions: ignoreExtensions
+            }, function(data) {
+                let html = '<div class="alert alert-success">';
+                html += `Scan completed: ${data.scanned} files indexed`;
+                if (data.errors && data.errors > 0) {
+                    html += `<br><small class="text-muted">${data.errors} errors</small>`;
+                }
+                html += '</div>';
+                $('#scanResult').html(html);
+                // Refresh the table to show newly indexed files
+                performSearch(currentPage);
+            }).fail(function(xhr) {
+                $('#scanResult').html('<div class="alert alert-danger">Scan failed: ' + xhr.responseText + '</div>');
+            });
+        });
+
+        // Initial load
+        performSearch(1);
+    </script>
+</body>
+</html>

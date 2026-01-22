@@ -1,0 +1,95 @@
+# Virtual view definitions
+views:
+  ByCategory:
+    description: "Organize files by category and subcategory."
+    rules:
+      - condition:
+          category: Documents
+        target: "Categories/Documents/{subcategory}/{name}"
+      - condition:
+          category: Images
+        target: "Categories/Images/{subcategory}/{name}"
+      - condition:
+          category: CAD
+        target: "Categories/CAD/{subcategory}/{name}"
+      - condition:
+          category: Code
+        target: "Categories/Code/{subcategory}/{name}"
+      - condition:
+          category: Archives
+        target: "Categories/Archives/{subcategory}/{name}"
+      - condition:
+          category: Media
+        target: "Categories/Media/{subcategory}/{name}"
+      - condition:
+          category: System
+        target: "Categories/System/{subcategory}/{name}"
+      - condition: {}
+        target: "Categories/Miscellaneous/{subcategory}/{name}"
+  
+  ByDate:
+    description: "Organize by creation year and month."
+    rules:
+      - condition: {}
+        target: "Date/{year}/{month_name}/{name}"
+  
+  ByProject:
+    description: "Group files by detected project (heuristic)."
+    rules:
+      - condition:
+          project: "*"
+        target: "Projects/{project}/{category}/{name}"
+      - condition: {}
+        target: "Projects/Unknown/{category}/{name}"
+  
+  BySoftware:
+    description: "Group by associated software."
+    rules:
+      - condition:
+          software: "*"
+        target: "Software/{software}/{name}"
+      - condition: {}
+        target: "Software/Unknown/{name}"
+  
+  BySize:
+    description: "Group by file size ranges."
+    rules:
+      - condition:
+          size: "< 102400"
+        target: "Size/Tiny (<100KB)/{name}"
+      - condition:
+          size: ">= 102400 and size < 1048576"
+        target: "Size/Small (100KB‑1MB)/{name}"
+      - condition:
+          size: ">= 1048576 and size < 10485760"
+        target: "Size/Medium (1‑10MB)/{name}"
+      - condition:
+          size: ">= 10485760 and size < 104857600"
+        target: "Size/Large (10‑100MB)/{name}"
+      - condition:
+          size: ">= 104857600"
+        target: "Size/Huge (>100MB)/{name}"
+  
+  ByUsage:
+    description: "Group by last access time."
+    rules:
+      - condition:
+          accessed: ">= now - 30 days"
+        target: "Usage/Recent (last 30 days)/{name}"
+      - condition:
+          accessed: ">= now - 365 days"
+        target: "Usage/Older (30‑365 days)/{name}"
+      - condition: {}
+        target: "Usage/Archived (>1 year)/{name}"
+  
+  Custom:
+    description: "User‑defined custom view (example)."
+    rules:
+      - condition:
+          extension: "pdf"
+          size: "> 5242880"
+        target: "Custom/Large PDFs/{year}/{name}"
+      - condition:
+          extension: "jpg"
+          category: "Images"
+        target: "Custom/Photos/{year}/{month}/{name}"

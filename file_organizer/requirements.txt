@@ -1,0 +1,27 @@
+# Core dependencies
+PyYAML>=6.0                # configuration
+tqdm>=4.66                 # progress bars
+
+# Windows-specific (for file attributes and symbolic links)
+pywin32>=306; sys_platform == "win32"
+
+# Metadata extraction
+Pillow>=10.0               # image EXIF
+python-docx>=0.8.11        # DOCX text
+PyPDF2>=3.0                # PDF text
+exifread>=3.0              # EXIF
+textract>=1.6              # various document formats (optional)
+pefile>=2023.2             # PE file version info
+
+# Web UI (optional)
+Flask>=2.3                 # web server
+Flask-CORS>=4.0            # CORS support
+
+# Development & testing
+pytest>=7.4                # testing framework (required for tests mentioned in README)
+pyinstaller>=5.13          # create standalone executable
+watchdog>=3.0              # real-time monitoring
+
+# Note: textract (line 12) is marked as optional in comments but will be installed by default.
+# To skip optional dependencies, install with: pip install --no-deps -r requirements.txt
+# then manually install only the packages you need.
